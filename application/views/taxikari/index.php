@@ -12,9 +12,10 @@
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<img src="<?php echo site_url(); ?>/../assets/img/logo/indexlogo2.jpg" class="rounded">
+
+				<img src="<?php echo site_url(); ?>/../assets/img/logo/indexlogo2.jpg" class="img-responsive">
 				<br/><br/>
-				<img src="<?php echo site_url(); ?>/../assets/img/logo/indexlogo1.jpg" class="rounded">
+				<img src="<?php echo site_url(); ?>/../assets/img/logo/indexlogo1.jpg" class="img-responsive">
 			</div>
 			<div class="col-xl">
 				<div class="row">
@@ -28,8 +29,8 @@
 					Máme vlastný dispečing ( 0940 550 1100 a 0940 550 220 ), na ktorý sa dovoláte NONSTOP.<br/><br/>
 					Okrem prepravy po Nitre a okolí zabezpečujeme aj transfer na letiská ( Bratislava, Schwechat a Praha ).<br/><br/>
 					Máme vlastný dispečing <b><?php echo $company['companyPhone']; ?></b><br/><br/>
+					Kontakt email <b><?php echo $company['companyEmail']; ?></b><br/><br/>
 					Majiťel firmy <b><?php echo $company['ownerFirstName'] . " " . $company['ownerLastName']; ?></b>
-
 					</p>
 				</div>
 			</div>

@@ -38,6 +38,28 @@ class Taxikari_model extends CI_Model {
 		}
 	}
 
+	function ZobrazZamestnanec($id="") {
+		if(!empty($id)) {
+			//$query = $this->db->get_where('employees',array('employees.id'=>$id));
+			/*
+			$this->db->select('*');
+			$this->db->from('company');
+			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id');
+			$query = $this->db->get_where('employees',array('employees.id'=>$id));
+			*/
+
+			$this->db->select('*');
+			$this->db->from('company');
+			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id', 'inner');
+			$query = $this->db->get();
+
+			return $query->row_array();
+		} else {
+			$query = $this->db->get('employees');
+			return $query->result_array();
+		}
+	}
+
 	// vlozenie zaznamu
 	public function insert($data = array()) {
 		$insert = $this->db->insert('employees', $data);

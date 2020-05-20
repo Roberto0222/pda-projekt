@@ -23,13 +23,12 @@
 							<table id="table" class="table table-dark text-centered" border="2">
 								<thead class="thead-dark">
 								<tr align="center">
-									<th scope="col" >ID</th>
+									<th scope="col">ID</th>
 									<th scope="col">Značka</th>
 									<th scope="col">Model</th>
 									<th scope="col">Rok výroby</th>
 									<th scope="col">Stav km</th>
 									<th scope="col">Stav paliva</th>
-									<th scope="col">Max paliva</th>
 									<th scope="col" colspan="3">Upraviť</th>
 								</tr>
 								</thead>
@@ -42,8 +41,27 @@
 										<td><?php echo $car['Model']; ?></td>
 										<td><?php echo $car['ManYear']; ?></td>
 										<td><?php echo $car['Odometer']; ?> km</td>
-										<td><?php echo $car['FuelQty']; ?> liter</td>
-										<td><?php echo $car['MaxFuel']; ?> liter</td>
+
+										<td>
+											<?php
+												$max = (double)($car['MaxFuel']);
+												$current = (double)($car['FuelQty']);
+												$percentage = $current*(100/$max);
+											echo $car['FuelQty'] . "/" . $car['MaxFuel'] . " liter - " . round($percentage,0) . "%"; ?>
+											<div class="progress">
+												<div class="<?php
+
+													if($percentage >= 70) {
+														echo 'progress-bar bg-success';
+													} else if($percentage >= 35 && $percentage < 70) {
+														echo 'progress-bar bg-warning';
+													} else if( $percentage < 35) {
+														echo 'progress-bar bg-danger';
+													}
+													?>" role="progressbar" style="width: <?php echo $current*(100/(double)($car['MaxFuel'])) . "%"; ?>" aria-valuenow="<?php echo $car['FuelQty']; ?>" aria-valuemin="0" aria-valuemax="<?php echo $car['MaxFuel']; ?>"
+												</div>
+											</div>
+										</td>
 										<td>
 											<a href="<?php echo site_url('auta/view/'.$car['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png"></a>
 										</td>

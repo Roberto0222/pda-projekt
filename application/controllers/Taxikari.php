@@ -50,10 +50,9 @@ class Taxikari extends CI_Controller {
 
 	public function view($id) {
 		$data = array();
-
 		if(!empty($id)) {
-			$data['employees'] = $this->Taxikari_model->ZobrazTaxikari($id);
-			$data['title'] = $data['employees']['lastName'] . ' ' . $data['employees']['firstName'];
+			$data['employees'] = $this->Taxikari_model->ZobrazZamestnanec($id);
+			$data['title'] = 'Zamestnanec - ' . $data['employees']['firstName'] . ' ' . $data['employees']['lastName'];
 
 			$this->load->view('templates/header',$data);
 			$this->load->view('taxikari/view',$data);
