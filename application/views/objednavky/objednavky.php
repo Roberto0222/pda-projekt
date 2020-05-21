@@ -73,7 +73,7 @@
 									<?php endif; ?>
 									<tr align="center">
 										<td colspan="12">
-											<a href="<?php echo site_url('taxikari/add/'); ?>">Pridať nový... <img src="<?php echo site_url();?>/../assets/img/icons/plus-4x.png" align="right"> </a>
+											<a href="<?php echo site_url('objednavky/add/'); ?>">Pridať nový... <img src="<?php echo site_url();?>/../assets/img/icons/plus-4x.png" align="right"> </a>
 										</td>
 									</tr>
 

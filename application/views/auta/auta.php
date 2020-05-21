@@ -21,6 +21,8 @@
 									<th scope="col">Rok výroby</th>
 									<th scope="col">Stav km</th>
 									<th scope="col">Stav paliva</th>
+									<th scope="col">Spotreba na 100 km</th>
+									<th scope="col">EČV</th>
 									<th scope="col" colspan="3">Upraviť</th>
 								</tr>
 								</thead>
@@ -33,7 +35,6 @@
 										<td><?php echo $car['Model']; ?></td>
 										<td><?php echo $car['ManYear']; ?></td>
 										<td><?php echo $car['Odometer']; ?> km</td>
-
 										<td>
 											<?php
 												$max = (double)($car['MaxFuel']);
@@ -55,6 +56,12 @@
 											</div>
 										</td>
 										<td>
+											<?php echo $car['FuelPer100KM'] . " liter"; ?>
+										</td>
+										<td>
+											<?php echo $car['LicensePlate']; ?>
+										</td>
+										<td>
 											<a href="<?php echo site_url('auta/view/'.$car['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
 										</td>
 										<td>
@@ -70,7 +77,7 @@
 									<tr><td colspan="5">Žiadne autá ......</td></tr>
 									<?php endif; ?>
 									<tr align="center">
-										<td colspan="10">
+										<td colspan="11">
 											<a href="<?php echo site_url('auta/add/'); ?>">Pridať nový... <img src="<?php echo site_url();?>/../assets/img/icons/plus-4x.png" align="right"> </a>
 										</td>
 									</tr>
