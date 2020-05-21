@@ -33,8 +33,8 @@ class Objednavky extends CI_Controller {
 	public function view($id) {
 		$data = array();
 		if(!empty($id)) {
-			$data['employees'] = $this->Objednavky_model->ZobrazObjednavky($id);
-			$data['title'] = 'Zamestnanec - ' . $data['employees']['firstName'] . ' ' . $data['employees']['lastName'];
+			$data['contracts'] = $this->Objednavky_model->ZobrazObjednavky($id);
+			$data['title'] = 'Objednávka - #' . $data['contracts']['id'];
 
 			$this->load->view('templates/header',$data);
 			$this->load->view('objednavky/view',$data);
@@ -148,7 +148,7 @@ class Objednavky extends CI_Controller {
 		//overenie, ci id nie je prazdne
 		if($id){
 			//odstranenie zaznamu
-			$delete = $this->Taxikari_model->delete($id);
+			$delete = $this->Objednavky_model->delete($id);
 
 			if($delete){
 				$this->session->set_userdata('success_msg', 'Záznam bol odstránený.');
