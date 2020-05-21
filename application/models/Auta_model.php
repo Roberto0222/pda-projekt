@@ -6,6 +6,16 @@ class Auta_model extends CI_Model {
 		$this->load->database();
 	}
 
+	function ZobrazFirmy($id="") {
+		if(!empty($id)) {
+			$query = $this->db->get_where('company',array('company.id'=>$id));
+			return $query->row_array();
+		} else {
+			$query = $this->db->get('company');
+			return $query->result_array();
+		}
+	}
+
 	function ZobrazAuta($id="") {
 		if(!empty($id)) {
 			$query = $this->db->get_where('cars',array('cars.id'=>$id));

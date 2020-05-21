@@ -6,6 +6,26 @@ class Taxikari_model extends CI_Model {
 		$this->load->database();
 	}
 
+	function ZobrazSluzby($id="") {
+		if(!empty($id)) {
+			$query = $this->db->get_where('services',array('services.idServices'=>$id));
+			return $query->row_array();
+		} else {
+			$query = $this->db->get('services');
+			return $query->result_array();
+		}
+	}
+
+	function ZobrazAuta($id="") {
+		if(!empty($id)) {
+			$query = $this->db->get_where('cars',array('cars.id'=>$id));
+			return $query->row_array();
+		} else {
+			$query = $this->db->get('cars');
+			return $query->result_array();
+		}
+	}
+
 	function ZobrazFirmy($id="") {
 		if(!empty($id)) {
 			$query = $this->db->get_where('company',array('company.id'=>$id));
@@ -18,21 +38,9 @@ class Taxikari_model extends CI_Model {
 
 	function ZobrazTaxikari($id="") {
 		if(!empty($id)) {
-			/*
-			$this->db->select('*');
-			$this->db->from('company');
-			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id');
-			$query = $this->db->get_where('employees',array('employees.id'=>$id));
-			*/
 			$query = $this->db->get_where('employees',array('employees.id'=>$id));
 			return $query->row_array();
 		} else {
-			/*
-			$this->db->select('*');
-			$this->db->from('company');
-			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id');
-			$query = $this->db->get();
-			*/
 			$query = $this->db->get('employees');
 			return $query->result_array();
 		}
@@ -40,14 +48,6 @@ class Taxikari_model extends CI_Model {
 
 	function ZobrazZamestnanec($id="") {
 		if(!empty($id)) {
-			//$query = $this->db->get_where('employees',array('employees.id'=>$id));
-			/*
-			$this->db->select('*');
-			$this->db->from('company');
-			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id');
-			$query = $this->db->get_where('employees',array('employees.id'=>$id));
-			*/
-
 			$this->db->select('*');
 			$this->db->from('company');
 			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id', 'inner');
@@ -69,6 +69,7 @@ class Taxikari_model extends CI_Model {
 			return false;
 		}
 	}
+
 
 	// aktualizacia zaznamu
 	public function update($data, $id) {

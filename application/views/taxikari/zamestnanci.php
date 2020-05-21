@@ -9,15 +9,7 @@
 		</div>
 	<?php } ?>
 
-	<div class="container">
-		<div class="row">
-			<div class="col-xl">
 
-			</div>
-			<div class="col-xl">
-				<div class="row">
-					<br/>
-				</div>
 				<div class="row justify-content-center">
 					<div class="table-responsive-xl">
 							<table id="table" class="table table-dark text-centered" border="2">
@@ -55,13 +47,13 @@
 										<td><?php echo $employee['lastName']; ?></td>
 										<td><?php echo $employee['telNumber']; ?></td>
 										<td>
-											<a href="<?php echo site_url('taxikari/view/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png"></a>
+											<a href="<?php echo site_url('taxikari/view/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
 										</td>
 										<td>
-											<a href="<?php echo site_url('taxikari/edit/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/wrench-4x.png"></a>
+											<a href="<?php echo site_url('taxikari/edit/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/wrench-4x.png" alt="Edit"></a>
 										</td>
 										<td>
-											<a href="<?php echo site_url('taxikari/delete/'.$employee['id']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png"></a>
+											<a href="<?php echo site_url('taxikari/delete/'.$employee['id']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png" alt="Delete"></a>
 										</td>
 									</tr>
 								<?php endforeach;?>
@@ -77,12 +69,7 @@
 
 								</tbody>
 							</table>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-xl">
-
 			</div>
 		</div>
+	</div>
 	</div>
