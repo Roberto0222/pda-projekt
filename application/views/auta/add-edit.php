@@ -57,7 +57,7 @@
 							<select class="form-control" name="firmaSelect">
 								<?php if(!empty($company)): foreach($company as $comp): ?>
 									<option name="TaxiSluzba_id" id="TaxiSluzba_id" value="<?php echo $comp['id']; ?>"
-										<?php if($post['TaxiSluzba_id'] == $comp['id']) echo "selected"; ?>><?php echo $comp['id'] . "- " . $comp['name']; ?></option>
+										<?php if(!empty($post['TaxiSluzba_id']) == $comp['id']) echo "selected"; ?>><?php echo $comp['id'] . "- " . $comp['name']; ?></option>
 								<?php endforeach;?>
 								<?php else: ?>
 									Žiadni firmy ......

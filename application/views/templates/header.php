@@ -31,6 +31,9 @@
 			<li class="nav-item">
 				<a class="nav-link" href="<?php echo site_url('auta/auta'); ?>">Autá</a>
 			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="<?php echo site_url('objednavky/objednavky'); ?>">Objednávky</a>
+			</li>
 		</ul>
 	</div>
 </nav>

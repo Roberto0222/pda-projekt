@@ -41,7 +41,11 @@ class Taxikari_model extends CI_Model {
 			$query = $this->db->get_where('employees',array('employees.id'=>$id));
 			return $query->row_array();
 		} else {
+			$this->db->join('services', 'services.idServices=employees.Services_idServices', 'inner');
 			$query = $this->db->get('employees');
+			/*
+			$query = $this->db->get('employees');
+			*/
 			return $query->result_array();
 		}
 	}
@@ -51,8 +55,8 @@ class Taxikari_model extends CI_Model {
 			$this->db->select('*');
 			$this->db->from('company');
 			$this->db->join('employees', 'company.id=employees.TaxiSluzba_id', 'inner');
+			$this->db->join('employees', 'services.idServices=employees.Services_idServices', 'inner');
 			$query = $this->db->get();
-
 			return $query->row_array();
 		} else {
 			$query = $this->db->get('employees');

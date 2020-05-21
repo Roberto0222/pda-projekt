@@ -33,13 +33,12 @@
 						</div>
 
 
-
 						<div class="form-group">
 							<label for="title">Firma</label>
 							<select class="form-control" name="firmaSelect">
 								<?php if(!empty($company)): foreach($company as $comp): ?>
 									<option name="TaxiSluzba_id" id="TaxiSluzba_id" value="<?php echo $comp['id']; ?>"
-										<?php if($post['TaxiSluzba_id'] == $comp['id']) echo "selected"; ?>><?php echo $comp['id'] . "- " . $comp['name']; ?></option>
+										<?php if(!empty($post['TaxiSluzba_id']) == $comp['id']) echo "selected"; ?>><?php echo $comp['id'] . "- " . $comp['name']; ?></option>
 								<?php endforeach;?>
 								<?php else: ?>
 									Žiadni firmy ......
@@ -49,12 +48,11 @@
 						</div>
 
 						<div class="form-group">
-							<?php echo $post['Services_idServices']; ?>
 							<label for="title">Služba - Cena per km</label>
 							<select class="form-control" name="sluzbySelect">
 								<?php if(!empty($services)): foreach($services as $service): ?>
 									<option name="Services_idServices" value="<?php echo $service['idServices']; ?>"
-										<?php if($post['Services_idServices'] == $service['idServices']) echo "selected"; ?>><?php echo $service['idServices'] . " - " . $service['name'] . " - " . $service['pricePerKm'] . " €"; ?></option>
+										<?php if(!empty($post['Services_idServices']) == $service['idServices']) echo "selected"; ?>><?php echo $service['idServices'] . " - " . $service['name'] . " - " . $service['pricePerKm'] . " €"; ?></option>
 								<?php endforeach;?>
 								<?php else: ?>
 									Žiadné služby ......
@@ -68,7 +66,7 @@
 							<select class="form-control" name="autoSelect">
 								<?php if(!empty($cars)): foreach($cars as $car): ?>
 									<option name="Cars_id" value="<?php echo $car['id']; ?>"
-									<?php if($post['Cars_id'] == $car['id']) echo "selected";?>><?php echo $car['id'] . " - " . $car['Brand'] . " - " . $car['Model'] . " - " . $car['ManYear'] . " - " .$car['LicensePlate']; ?></option>
+									<?php if(!empty($post['Cars_id']) == $car['id']) echo "selected";?>><?php echo $car['id'] . " - " . $car['Brand'] . " - " . $car['Model'] . " - " . $car['ManYear'] . " - " .$car['LicensePlate']; ?></option>
 								<?php endforeach;?>
 								<?php else: ?>
 									Žiadné autá ......

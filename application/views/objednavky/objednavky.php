@@ -16,11 +16,14 @@
 								<thead class="thead-dark">
 								<tr align="center">
 									<th scope="col">ID</th>
-									<th scope="col">Meno</th>
-									<th scope="col">Priezvisko</th>
-									<th scope="col">Tel. číslo</th>
-									<th scope="col">Služba</th>
-									<th scope="col">Cena</th>
+									<th scope="col">Dátum</th>
+									<th scope="col">Latitude</th>
+									<th scope="col">Longitude</th>
+									<th scope="col">Odkiaľ</th>
+									<th scope="col">Kam</th>
+									<th scope="col">Vzdialenosť</th>
+									<th scope="col">Používané palivo</th>
+									<th scope="col">Dokončil</th>
 									<th scope="col" colspan="3" width="20%">Upraviť</th>
 								</tr>
 								</thead>
@@ -42,22 +45,25 @@
 								</tr>
 								-->
 
-								<?php if(!empty($employees)): foreach($employees as $employee): ?>
+								<?php if(!empty($contracts)): foreach($contracts as $contract): ?>
 									<tr>
-										<td><?php echo '#'.$employee['id']; ?></td>
-										<td><?php echo $employee['firstName']; ?></td>
-										<td><?php echo $employee['lastName']; ?></td>
-										<td><?php echo $employee['telNumber']; ?></td>
-										<td><?php echo $employee['name']; ?></td>
-										<td><?php echo $employee['pricePerKm'] . " €"; ?></td>
+										<td><?php echo '#'.$contract['id']; ?></td>
+										<td><?php echo $contract['callDate']; ?></td>
+										<td><?php echo $contract['latitude']; ?></td>
+										<td><?php echo $contract['longitude']; ?></td>
+										<td><?php echo $contract['locationFrom']; ?></td>
+										<td><?php echo $contract['locationTo']; ?></td>
+										<td><?php echo $contract['distanceInKm'] . " km"; ?></td>
+										<td><?php echo $contract['fuelUsed'] . " liter"; ?></td>
+										<td><?php echo $contract['firstName'] . " " . $contract['lastName']; ?></td>
 										<td>
-											<a href="<?php echo site_url('taxikari/view/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
+											<a href="<?php echo site_url('objednavky/view/'.$contract['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
 										</td>
 										<td>
-											<a href="<?php echo site_url('taxikari/edit/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/wrench-4x.png" alt="Edit"></a>
+											<a href="<?php echo site_url('objednavky/edit/'.$contract['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/wrench-4x.png" alt="Edit"></a>
 										</td>
 										<td>
-											<a href="<?php echo site_url('taxikari/delete/'.$employee['id']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png" alt="Delete"></a>
+											<a href="<?php echo site_url('objednavky/delete/'.$contract['id']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png" alt="Delete"></a>
 										</td>
 									</tr>
 								<?php endforeach;?>
@@ -66,7 +72,7 @@
 									<tr><td colspan="5">Žiadni študenti ......</td></tr>
 									<?php endif; ?>
 									<tr align="center">
-										<td colspan="9">
+										<td colspan="12">
 											<a href="<?php echo site_url('taxikari/add/'); ?>">Pridať nový... <img src="<?php echo site_url();?>/../assets/img/icons/plus-4x.png" align="right"> </a>
 										</td>
 									</tr>
