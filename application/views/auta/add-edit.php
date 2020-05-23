@@ -51,6 +51,11 @@
 							<input type="text" class="form-control" name="LicensePlate" placeholder="Vložte EČV" value="<?php echo !empty($post['LicensePlate'])?$post['LicensePlate']:''; ?>" maxlength="8">
 							<?php echo form_error('LicensePlate','<p class="help-block text-danger">','</p>'); ?>
 						</div>
+						<div class="form-group">
+							<label for="title">Spotreba na 100 km</label>
+							<input type="number" class="form-control" name="FuelPer100KM" placeholder="Vložte spotreba na 100 km" value="<?php echo !empty($post['FuelPer100KM'])?$post['FuelPer100KM']:''; ?>" step="0.01">
+							<?php echo form_error('FuelPer100KM','<p class="help-block text-danger">','</p>'); ?>
+						</div>
 
 						<div class="form-group">
 							<label for="title">Firma</label>

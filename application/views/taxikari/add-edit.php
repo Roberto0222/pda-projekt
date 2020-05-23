@@ -47,33 +47,6 @@
 							</select>
 						</div>
 
-						<div class="form-group">
-							<label for="title">Služba - Cena per km</label>
-							<select class="form-control" name="sluzbySelect">
-								<?php if(!empty($services)): foreach($services as $service): ?>
-									<option name="Services_idServices" value="<?php echo $service['idServices']; ?>"
-										<?php if(!empty($post['Services_idServices']) == $service['idServices']) echo "selected"; ?>><?php echo $service['idServices'] . " - " . $service['name'] . " - " . $service['pricePerKm'] . " €"; ?></option>
-								<?php endforeach;?>
-								<?php else: ?>
-									Žiadné služby ......
-								<?php endif; ?>
-								<?php echo form_error('Services_idServices','<p class="help-block text-danger">','</p>'); ?>
-							</select>
-						</div>
-
-						<div class="form-group">
-							<label for="title">Auto</label>
-							<select class="form-control" name="autoSelect">
-								<?php if(!empty($cars)): foreach($cars as $car): ?>
-									<option name="Cars_id" value="<?php echo $car['id']; ?>"
-									<?php if(!empty($post['Cars_id']) == $car['id']) echo "selected";?>><?php echo $car['id'] . " - " . $car['Brand'] . " - " . $car['Model'] . " - " . $car['ManYear'] . " - " .$car['LicensePlate']; ?></option>
-								<?php endforeach;?>
-								<?php else: ?>
-									Žiadné autá ......
-								<?php endif; ?>
-								<?php echo form_error('Cars_id','<p class="help-block text-danger">','</p>'); ?>
-							</select>
-						</div>
 
 
 

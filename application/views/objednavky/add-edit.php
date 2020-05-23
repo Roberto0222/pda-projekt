@@ -64,9 +64,9 @@
 
 						<div class="form-group">
 							<label for="title">Zamestnanec - Auto</label>
-							<select class="form-control" name="employeeCarSelect">
+							<select class="form-control" name="employeeCarSelect" disabled="true">
 								<?php if(!empty($cars)): foreach($cars as $car): ?>
-									<option name="Services_idServices" value="<?php echo $car['id']; ?>"
+									<option name="Employees_Cars_id" value="<?php echo $car['id']; ?>"
 										<?php if(!empty($post['Employees_Cars_id']) == $car['id']) echo "selected"; ?>><?php echo $car['id'] . " - " . $car['Brand'] . " - " . $car['Model']; ?></option>
 								<?php endforeach;?>
 								<?php else: ?>

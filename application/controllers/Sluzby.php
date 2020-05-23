@@ -1,17 +1,15 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Objednavky extends CI_Controller {
+class Sluzby extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->helper('form');
 		$this->load->library('form_validation');
-		$this->load->model('Objednavky_model');
-		$this->load->model('Taxikari_model');
-		$this->load->model('Auta_model');
+		$this->load->model('Sluzby_model');
 	}
 
-	public function objednavky() {
+	public function sluzby() {
 		$data = array();
 		//ziskanie sprav zo session
 		if($this->session->userdata('success_msg')){
@@ -24,22 +22,22 @@ class Objednavky extends CI_Controller {
 		}
 
 
-		$data['contracts'] = $this->Objednavky_model->ZobrazObjednavky();
-		$data['title'] = 'Objednávky';
+		$data['services'] = $this->Sluzby_model->ZobrazSluzby();
+		$data['title'] = 'Taxislužba';
 
 		$this->load->view('templates/header', $data);
-		$this->load->view('objednavky/objednavky', $data);
+		$this->load->view('sluzby/sluzby', $data);
 		$this->load->view('templates/footer');
 	}
 
 	public function view($id) {
 		$data = array();
 		if(!empty($id)) {
-			$data['contracts'] = $this->Objednavky_model->ZobrazObjednavky($id);
-			$data['title'] = 'Objednávka - #' . $data['contracts']['id'];
+			$data['employees'] = $this->Taxikari_model->ZobrazZamestnanec($id);
+			$data['title'] = 'Zamestnanec - ' . $data['employees']['firstName'] . ' ' . $data['employees']['lastName'];
 
 			$this->load->view('templates/header',$data);
-			$this->load->view('objednavky/view',$data);
+			$this->load->view('taxikari/view',$data);
 			$this->load->view('templates/footer');
 		} else {
 			redirect('/taxikari');
@@ -54,28 +52,19 @@ class Objednavky extends CI_Controller {
 		//zistenie, ci bola zaslana poziadavka na pridanie zazanmu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
-			$this->form_validation->set_rules('latitude', 'Pole latitude', 'required');
-			$this->form_validation->set_rules('longitude', 'Pole longitude', 'required');
-			$this->form_validation->set_rules('locationFrom', 'Pole odkiaľ', 'required');
-			$this->form_validation->set_rules('locationTo', 'Pole kam', 'required');
-			$this->form_validation->set_rules('distanceInKm', 'Pole vzdialenosť', 'required');
+			$this->form_validation->set_rules('name', 'Pole názov', 'required');
+			$this->form_validation->set_rules('pricePerKm', 'Pole cena za km', 'required');
 
 			//priprava dat pre vlozenie
 			$postData = array(
-				'latitude' => $this->input->post('latitude'),
-				'longitude' => $this->input->post('longitude'),
-				'locationFrom' => $this->input->post('locationFrom'),
-				'locationTo' => $this->input->post('locationTo'),
-				'distanceInKm' => $this->input->post('distanceInKm'),
-				'fuelUsed' => $this->input->post('fuelUsed'),
-				'Employees_id' => $this->input->post('employeeSelect'),
-				'Employees_Cars_id' => $this->input->post('employeeCarSelect')
+				'name' => $this->input->post('name'),
+				'pricePerKm' => $this->input->post('pricePerKm')
 			);
 
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
 				//vlozenie dat
-				$insert = $this->Objednavky_model->insert($postData);
+				$insert = $this->Sluzby_model->insert($postData);
 
 				if($insert){
 					$this->session->set_userdata('success_msg', 'Záznam o taxikárovi bol úspešne vložený');
@@ -86,14 +75,13 @@ class Objednavky extends CI_Controller {
 			}
 		}
 		$data['post'] = $postData;
-		$data['title'] = 'Pridať zamestnanec';
+		$data['title'] = 'Pridať službu';
 		$data['action'] = 'add';
-		$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
-		$data['cars'] = $this->Auta_model->ZobrazAuta();
+		$data['services'] = $this->Sluzby_model->ZobrazSluzby();
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);
-		$this->load->view('objednavky/add-edit', $data);
+		$this->load->view('sluzby/add-edit', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -101,32 +89,23 @@ class Objednavky extends CI_Controller {
 	public function edit($id){
 		$data = array();
 		//ziskanie dat z tabulky
-		$postData = $this->Objednavky_model->ZobrazObjednavky($id);
+		$postData = $this->Sluzby_model->ZobrazSluzby($id);
 
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
-			$this->form_validation->set_rules('latitude', 'Pole latitude', 'required');
-			$this->form_validation->set_rules('longitude', 'Pole longitude', 'required');
-			$this->form_validation->set_rules('locationFrom', 'Pole odkiaľ', 'required');
-			$this->form_validation->set_rules('locationTo', 'Pole kam', 'required');
-			$this->form_validation->set_rules('distanceInKm', 'Pole vzdialenosť', 'required');
+			$this->form_validation->set_rules('name', 'Pole názov', 'required');
+			$this->form_validation->set_rules('pricePerKm', 'Pole cena za km', 'required');
 
 			//priprava dat pre vlozenie
 			$postData = array(
-				'latitude' => $this->input->post('latitude'),
-				'longitude' => $this->input->post('longitude'),
-				'locationFrom' => $this->input->post('locationFrom'),
-				'locationTo' => $this->input->post('locationTo'),
-				'distanceInKm' => $this->input->post('distanceInKm'),
-				'fuelUsed' => $this->input->post('fuelUsed'),
-				'Employees_id' => $this->input->post('employeeSelect'),
-				'Employees_Cars_id' => $this->input->post('employeeCarSelect')
+				'name' => $this->input->post('name'),
+				'pricePerKm' => $this->input->post('pricePerKm')
 			);
 
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
 				//aktualizacia dat
-				$update = $this->Objednavky_model->update($postData, $id);
+				$update = $this->Sluzby_model->update($postData, $id);
 
 				if($update){
 					$this->session->set_userdata('success_msg', 'Záznam o študentovi bol aktualizovaný.');
@@ -140,14 +119,13 @@ class Objednavky extends CI_Controller {
 		//$data['users'] = $this->Temperatures_model->get_users_dropdown();
 		//	$data['users_selected'] = $postData['user'];
 		$data['post'] = $postData;
-		$data['title'] = 'Pridať zamestnanec';
+		$data['title'] = 'Upravovať službu';
 		$data['action'] = 'edit';
-		$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
-		$data['cars'] = $this->Auta_model->ZobrazAuta();
+		$data['services'] = $this->Sluzby_model->ZobrazSluzby();
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);
-		$this->load->view('objednavky/add-edit', $data);
+		$this->load->view('sluzby/add-edit', $data);
 		$this->load->view('templates/footer');
 	}
 
@@ -156,7 +134,7 @@ class Objednavky extends CI_Controller {
 		//overenie, ci id nie je prazdne
 		if($id){
 			//odstranenie zaznamu
-			$delete = $this->Objednavky_model->delete($id);
+			$delete = $this->Sluzby_model->delete($id);
 
 			if($delete){
 				$this->session->set_userdata('success_msg', 'Záznam bol odstránený.');

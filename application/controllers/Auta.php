@@ -30,6 +30,7 @@ class Auta extends CI_Controller {
 
 	public function auta() {
 		$data = array();
+
 		//ziskanie sprav zo session
 		if($this->session->userdata('success_msg')){
 			$data['success_msg'] = $this->session->userdata('success_msg');
@@ -42,7 +43,6 @@ class Auta extends CI_Controller {
 
 
 		$data['cars'] = $this->Auta_model->ZobrazAuta();
-
 		$data['title'] = 'Taxislužba';
 
 		$this->load->view('templates/header', $data);
@@ -73,23 +73,25 @@ class Auta extends CI_Controller {
 		//zistenie, ci bola zaslana poziadavka na pridanie zazanmu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
-			$this->form_validation->set_rules('carBrand', 'Pole značka', 'required');
-			$this->form_validation->set_rules('carModel', 'Pole model', 'required');
-			$this->form_validation->set_rules('manYear', 'Pole rok výroby', 'required');
-			$this->form_validation->set_rules('odometer', 'Pole stav km', 'required');
-			$this->form_validation->set_rules('fuelQty', 'Pole stav paliva', 'required');
-			$this->form_validation->set_rules('fuelMax', 'Pole max paliva', 'required');
-			$this->form_validation->set_rules('licensePlate', 'Pole EČV', 'required');
+			$this->form_validation->set_rules('Brand', 'Pole značka', 'required');
+			$this->form_validation->set_rules('Model', 'Pole model', 'required');
+			$this->form_validation->set_rules('ManYear', 'Pole rok výroby', 'required');
+			$this->form_validation->set_rules('Odometer', 'Pole stav km', 'required');
+			$this->form_validation->set_rules('FuelQty', 'Pole stav paliva', 'required');
+			$this->form_validation->set_rules('MaxFuel', 'Pole max paliva', 'required');
+			$this->form_validation->set_rules('LicensePlate', 'Pole EČV', 'required');
+			$this->form_validation->set_rules('FuelPer100KM', 'Pole spotreba na 100 km', 'required');
 
 			//priprava dat pre vlozenie
 			$postData = array(
-				'Brand' => $this->input->post('carBrand'),
-				'Model' => $this->input->post('carModel'),
-				'ManYear' => $this->input->post('manYear'),
-				'Odometer' => $this->input->post('odometer'),
-				'FuelQty' => $this->input->post('fuelQty'),
-				'MaxFuel' => $this->input->post('fuelMax'),
-				'LicensePlate' => $this->input->post('licensePlate'),
+				'Brand' => $this->input->post('Brand'),
+				'Model' => $this->input->post('Model'),
+				'ManYear' => $this->input->post('ManYear'),
+				'Odometer' => $this->input->post('Odometer'),
+				'FuelQty' => $this->input->post('FuelQty'),
+				'MaxFuel' => $this->input->post('MaxFuel'),
+				'LicensePlate' => $this->input->post('LicensePlate'),
+				'FuelPer100KM' => $this->input->post('FuelPer100KM'),
 				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
 
@@ -128,6 +130,12 @@ class Auta extends CI_Controller {
 			//definicia pravidiel validacie
 			$this->form_validation->set_rules('Brand', 'Pole značka', 'required');
 			$this->form_validation->set_rules('Model', 'Pole model', 'required');
+			$this->form_validation->set_rules('ManYear', 'Pole rok výroby', 'required');
+			$this->form_validation->set_rules('Odometer', 'Pole stav km', 'required');
+			$this->form_validation->set_rules('FuelQty', 'Pole stav paliva', 'required');
+			$this->form_validation->set_rules('MaxFuel', 'Pole max paliva', 'required');
+			$this->form_validation->set_rules('LicensePlate', 'Pole EČV', 'required');
+			$this->form_validation->set_rules('FuelPer100KM', 'Pole spotreba na 100 km', 'required');
 
 			//priprava dat pre vlozenie
 			$postData = array(
@@ -138,6 +146,7 @@ class Auta extends CI_Controller {
 				'FuelQty' => $this->input->post('FuelQty'),
 				'MaxFuel' => $this->input->post('MaxFuel'),
 				'LicensePlate' => $this->input->post('LicensePlate'),
+				'FuelPer100KM' => $this->input->post('FuelPer100KM'),
 				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
 

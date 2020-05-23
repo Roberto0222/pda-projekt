@@ -41,11 +41,8 @@ class Taxikari_model extends CI_Model {
 			$query = $this->db->get_where('employees',array('employees.id'=>$id));
 			return $query->row_array();
 		} else {
-			$this->db->join('services', 'services.idServices=employees.Services_idServices', 'inner');
+			$this->db->join('services', 'services.idServices=employees.Services_idServices', 'left');
 			$query = $this->db->get('employees');
-			/*
-			$query = $this->db->get('employees');
-			*/
 			return $query->result_array();
 		}
 	}

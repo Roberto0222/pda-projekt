@@ -21,6 +21,7 @@ class Auta_model extends CI_Model {
 			$query = $this->db->get_where('cars',array('cars.id'=>$id));
 			return $query->row_array();
 		} else {
+			$this->db->join('employees', 'employees.Cars_id=cars.id', 'inner');
 			$query = $this->db->get('cars');
 			return $query->result_array();
 		}

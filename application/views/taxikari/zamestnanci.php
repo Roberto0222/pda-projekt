@@ -48,8 +48,11 @@
 										<td><?php echo $employee['firstName']; ?></td>
 										<td><?php echo $employee['lastName']; ?></td>
 										<td><?php echo $employee['telNumber']; ?></td>
-										<td><?php echo $employee['name']; ?></td>
-										<td><?php echo $employee['pricePerKm'] . " €"; ?></td>
+										<td><?php if(!empty($employee['name'])) echo $employee['name'];
+												  else echo "Nie je nastavené"?></td>
+										<td><?php if(!empty($employee['pricePerKm'])) echo $employee['pricePerKm'] . " €";
+											else echo "Nie je nastavené"?></td>
+
 										<td>
 											<a href="<?php echo site_url('taxikari/view/'.$employee['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
 										</td>

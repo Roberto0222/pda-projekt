@@ -126,9 +126,7 @@ class Taxikari extends CI_Controller {
 				'lastName' => $this->input->post('lastName'),
 				'firstName' => $this->input->post('firstName'),
 				'telNumber' => $this->input->post('telNumber'),
-				'TaxiSluzba_id' => $this->input->post('firmaSelect'),
-				'Services_idServices' => $this->input->post('sluzbySelect'),
-				'Cars_id' => $this->input->post('autoSelect')
+				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
 
 			//validacia zaslanych dat
