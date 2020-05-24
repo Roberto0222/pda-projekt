@@ -78,10 +78,11 @@ class Taxikari extends CI_Controller {
 				'lastName' => $this->input->post('lastName'),
 				'firstName' => $this->input->post('firstName'),
 				'telNumber' => $this->input->post('telNumber'),
-				'TaxiSluzba_id' => $this->input->post('firmaSelect'),
 				'Services_idServices' => $this->input->post('sluzbySelect'),
-				'Cars_id' => $this->input->post('autoSelect')
+				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
+
+			$postData['Services_idServices'] = (!empty($postData['Services_idServices'])) ? $postData['Services_idServices'] : NULL;
 
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
@@ -120,14 +121,17 @@ class Taxikari extends CI_Controller {
 			$this->form_validation->set_rules('lastName', 'Pole priezvisko', 'required');
 			$this->form_validation->set_rules('firstName', 'Pole meno', 'required');
 			$this->form_validation->set_rules('telNumber', 'Pole tel. číslo', 'required');
-
+			$service = "";
 			//priprava dat pre vlozenie
 			$postData = array(
 				'lastName' => $this->input->post('lastName'),
 				'firstName' => $this->input->post('firstName'),
 				'telNumber' => $this->input->post('telNumber'),
+				'Services_idServices' => $this->input->post('sluzbySelect'),
 				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
+
+			$postData['Services_idServices'] = (!empty($postData['Services_idServices'])) ? $postData['Services_idServices'] : NULL;
 
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
@@ -157,6 +161,7 @@ class Taxikari extends CI_Controller {
 		$this->load->view('taxikari/add-edit', $data);
 		$this->load->view('templates/footer');
 	}
+
 
 	// odstranenie dat o studentovi
 	public function delete($id){

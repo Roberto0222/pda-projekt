@@ -23,7 +23,7 @@
 									<th scope="col">Stav paliva</th>
 									<th scope="col">Spotreba na 100 km</th>
 									<th scope="col">EČV</th>
-									<th scope="col">Pridelený vodič</th>
+									<th scope="col">Pridelený šofér</th>
 									<th scope="col" colspan="3">Upraviť</th>
 								</tr>
 								</thead>
@@ -31,7 +31,7 @@
 
 								<?php if(!empty($cars)): foreach($cars as $car): ?>
 									<tr>
-										<td><?php echo '#'.$car['id']; ?></td>
+										<td><?php echo '#'.$car['carid']; ?></td>
 										<td><?php echo $car['Brand']; ?></td>
 										<td><?php echo $car['Model']; ?></td>
 										<td><?php echo $car['ManYear']; ?></td>
@@ -63,7 +63,7 @@
 											<?php echo $car['LicensePlate']; ?>
 										</td>
 										<td>
-											<?php if(!empty($car['firstName']) && !empty($car['lastName'])) {
+											<?php if($car['carid'] == $car['Cars_id']) {
 												echo $car['firstName'] . " " . $car['lastName'];
 											} else {
 												echo "Nikto";
@@ -71,13 +71,13 @@
 											?>
 										</td>
 										<td>
-											<a href="<?php echo site_url('auta/view/'.$car['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
+											<a href="<?php echo site_url('auta/view/'.$car['carid']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/magnifying-glass-4x.png" alt="View"></a>
 										</td>
 										<td>
-											<a href="<?php echo site_url('auta/edit/'.$car['id']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/wrench-4x.png" alt="Edit"></a>
+											<a href="<?php echo site_url('auta/edit/'.$car['carid']); ?>"><img src="<?php echo site_url();?>/../assets/img/icons/wrench-4x.png" alt="Edit"></a>
 										</td>
 										<td>
-											<a href="<?php echo site_url('auta/delete/'.$car['id']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png" alt="Delete"></a>
+											<a href="<?php echo site_url('auta/delete/'.$car['carid']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png" alt="Delete"></a>
 										</td>
 									</tr>
 								<?php endforeach;?>

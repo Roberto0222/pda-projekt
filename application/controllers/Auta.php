@@ -7,6 +7,7 @@ class Auta extends CI_Controller {
 		$this->load->helper('form');
 		$this->load->library('form_validation');
 		$this->load->model('Auta_model');
+		$this->load->model('Taxikari_model');
 	}
 	public function index(){
 		$data = array();
@@ -95,11 +96,16 @@ class Auta extends CI_Controller {
 				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
 
+			$postData2 = array (
+				'employees.Cars_id' => $this->input->post('taxikarSelect')
+			);
+
+			$postData2['employees.Cars_id'] = (!empty($postData2['employees.Cars_id'])) ? $postData2['employees.Cars_id'] : NULL;
+
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
 				//vlozenie dat
 				$insert = $this->Auta_model->insert($postData);
-
 				if($insert){
 					$this->session->set_userdata('success_msg', 'Záznam o aut bol úspešne vložený');
 					redirect('/taxikari');
@@ -113,6 +119,7 @@ class Auta extends CI_Controller {
 		$data['action'] = 'add';
 		$data['company'] = $this->Auta_model->ZobrazFirmy();
 		$data['cars'] = $this->Auta_model->ZobrazAuta();
+		$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);
@@ -124,7 +131,6 @@ class Auta extends CI_Controller {
 	public function edit($id){
 		$data = array();
 		$postData = $this->Auta_model->ZobrazAuta($id);
-
 		//zistenie, ci bola zaslana poziadavka na pridanie zazanmu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
@@ -150,12 +156,19 @@ class Auta extends CI_Controller {
 				'TaxiSluzba_id' => $this->input->post('firmaSelect')
 			);
 
+			$postData2 = array (
+				'Cars_id' => $id,
+				'id' => $this->input->post('taxikarSelect')
+			);
+
+			$postData2['id'] = (!empty($postData2['id'])) ? $postData2['id'] : NULL;
+
 			//validacia zaslanych dat
 			if($this->form_validation->run() == true){
 				//aktualizacia dat
 				$update = $this->Auta_model->update($postData, $id);
-
-				if($update){
+				$update2 = $this->Auta_model->updateEmployees($postData2,$postData2['id']);
+				if($update && $update2){
 					$this->session->set_userdata('success_msg', 'Záznam o aut bol aktualizovaný.');
 					redirect('/taxikari');
 				}else{
@@ -169,6 +182,7 @@ class Auta extends CI_Controller {
 		$data['action'] = 'edit';
 		$data['company'] = $this->Auta_model->ZobrazFirmy();
 		$data['cars'] = $this->Auta_model->ZobrazAuta();
+		$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
 
 		//zobrazenie formulara pre vlozenie a editaciu dat
 		$this->load->view('templates/header', $data);

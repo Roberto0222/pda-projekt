@@ -21,7 +21,8 @@ class Auta_model extends CI_Model {
 			$query = $this->db->get_where('cars',array('cars.id'=>$id));
 			return $query->row_array();
 		} else {
-			$this->db->join('employees', 'employees.Cars_id=cars.id', 'inner');
+			$this->db->select('*,cars.id as carid,employees.id as employeeid');
+			$this->db->join('employees', 'cars.id=employees.Cars_id', 'left');
 			$query = $this->db->get('cars');
 			return $query->result_array();
 		}
@@ -40,7 +41,16 @@ class Auta_model extends CI_Model {
 	// aktualizacia zaznamu
 	public function update($data, $id) {
 		if(!empty($data) && !empty($id)){
-			$update = $this->db->update('cars', $data, array('id'=>$id));
+			$update = $this->db->update('cars', $data, array('cars.id'=>$id));
+			return $update?true:false;
+		}else{
+			return false;
+		}
+	}
+
+	public function updateEmployees($data, $id) {
+		if(!empty($data) && !empty($id)){
+			$update = $this->db->update('employees', $data, array('employees.id'=>$id));
 			return $update?true:false;
 		}else{
 			return false;
@@ -49,7 +59,7 @@ class Auta_model extends CI_Model {
 
 	// odstranenie zaznamu
 	public function delete($id){
-		$delete = $this->db->delete('cars',array('id'=>$id));
+		$delete = $this->db->delete('cars',array('cars.id'=>$id));
 		return $delete?true:false;
 	}
 }

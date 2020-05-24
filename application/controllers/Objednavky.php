@@ -68,8 +68,7 @@ class Objednavky extends CI_Controller {
 				'locationTo' => $this->input->post('locationTo'),
 				'distanceInKm' => $this->input->post('distanceInKm'),
 				'fuelUsed' => $this->input->post('fuelUsed'),
-				'Employees_id' => $this->input->post('employeeSelect'),
-				'Employees_Cars_id' => $this->input->post('employeeCarSelect')
+				'Employees_id' => $this->input->post('employeeSelect')
 			);
 
 			//validacia zaslanych dat
@@ -119,8 +118,7 @@ class Objednavky extends CI_Controller {
 				'locationTo' => $this->input->post('locationTo'),
 				'distanceInKm' => $this->input->post('distanceInKm'),
 				'fuelUsed' => $this->input->post('fuelUsed'),
-				'Employees_id' => $this->input->post('employeeSelect'),
-				'Employees_Cars_id' => $this->input->post('employeeCarSelect')
+				'Employees_id' => $this->input->post('employeeSelect')
 			);
 
 			//validacia zaslanych dat

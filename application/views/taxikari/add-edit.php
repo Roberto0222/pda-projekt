@@ -32,6 +32,20 @@
 							<?php echo form_error('telNumber','<p class="help-block text-danger">','</p>'); ?>
 						</div>
 
+						<div class="form-group">
+							<label for="title">Služba</label>
+							<select class="form-control" name="sluzbySelect">
+								<option name="Services_idServices" id="Services_idServices" value="0">Nie je priradený</option>
+								<?php if(!empty($services)): foreach($services as $service): ?>
+									<option name="Services_idServices" id="Services_idServices" value="<?php echo $service['idServices']; ?>"
+										<?php if(!empty($post['Services_idServices']) == $service['idServices']) echo "selected"; ?>><?php echo $service['idServices'] . " - " . $service['name']; ?></option>
+								<?php endforeach;?>
+								<?php else: ?>
+									Žiadni firmy ......
+								<?php endif; ?>
+								<?php echo form_error('Services_idServices','<p class="help-block text-danger">','</p>'); ?>
+							</select>
+						</div>
 
 						<div class="form-group">
 							<label for="title">Firma</label>

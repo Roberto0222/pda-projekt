@@ -58,6 +58,23 @@
 						</div>
 
 						<div class="form-group">
+							<label for="title">Pridelený vodič</label>
+							<select class="form-control" name="taxikarSelect">
+								<option name="id" id="id" value="0">Nie je priradený</option>
+								<?php if(!empty($employees)): foreach($employees as $employee): ?>
+									<?php if($employee['Cars_id'] == NULL) { ?>
+									<option name="id" id="id" value="<?php echo $employee['id']; ?>"
+										<?php if(!empty($post['id']) == $employee['id']) echo "selected"; ?>><?php echo $employee['id'] . "- " . $employee['firstName'] . " " . $employee['lastName']; ?></option>
+									<?php } ?>
+								<?php endforeach;?>
+								<?php else: ?>
+									Žiadni taxikari ......
+								<?php endif; ?>
+								<?php echo form_error('id','<p class="help-block text-danger">','</p>'); ?>
+							</select>
+						</div>
+
+						<div class="form-group">
 							<label for="title">Firma</label>
 							<select class="form-control" name="firmaSelect">
 								<?php if(!empty($company)): foreach($company as $comp): ?>
