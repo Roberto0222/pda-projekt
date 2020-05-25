@@ -25,22 +25,6 @@
 								</tr>
 								</thead>
 								<tbody id="userData">
-								<!--
-								<tr>
-									<td colspan="7">
-										<div class="form-group">
-											<select class="form-control" id="company">
-												<?php if(!empty($company)): foreach($company as $comp): ?>
-													<option><?php echo $comp['name']; ?></option>
-												<?php endforeach;?>
-												<?php else: ?>
-												<tr><td colspan="5">Žiadni firmy ......</td></tr>
-												<?php endif; ?>
-											</select>
-										</div>
-									</td>
-								</tr>
-								-->
 
 								<?php if(!empty($employees)): foreach($employees as $employee): ?>
 
@@ -78,6 +62,7 @@
 
 								</tbody>
 							</table>
+						<p style="font-size: 24px; letter-spacing: 8px;"><?php echo $links; ?></p>
 			</div>
 		</div>
 	</div>

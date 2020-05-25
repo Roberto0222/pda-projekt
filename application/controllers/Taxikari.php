@@ -4,10 +4,13 @@ class Taxikari extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->library('pagination');
 		$this->load->model('Taxikari_model');
 	}
+	/*
 	public function index(){
 		$data = array();
 		//ziskanie sprav zo session
@@ -26,8 +29,10 @@ class Taxikari extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function taxikari() {
+	public function auta() {
 		$data = array();
+		$config = array();
+
 		//ziskanie sprav zo session
 		if($this->session->userdata('success_msg')){
 			$data['success_msg'] = $this->session->userdata('success_msg');
@@ -38,8 +43,56 @@ class Taxikari extends CI_Controller {
 			$this->session->unset_userdata('error_msg');
 		}
 
+		$config["base_url"] = "http://localhost/pda-projekt/index.php/auta/auta";
+		$config["total_rows"] = $this->Auta_model->get_count();
+		$config["per_page"] = 5;
+		$config['uri_segment'] = 3;
 
-		$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
+		$config['first_link'] = 'Prvý';
+		$config['last_link'] = 'Posledný';
+
+		$limit = $config['per_page'];
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data["links"] = $this->pagination->create_links();
+		$data['cars'] = $this->Auta_model->get_cars($limit, $page);
+		$data['title'] = 'Taxislužba';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('auta/auta', $data);
+		$this->load->view('templates/footer');
+	}
+	*/
+
+	public function taxikari() {
+		$data = array();
+		$config = array();
+
+		//ziskanie sprav zo session
+		if($this->session->userdata('success_msg')){
+			$data['success_msg'] = $this->session->userdata('success_msg');
+			$this->session->unset_userdata('success_msg');
+		}
+		if($this->session->userdata('error_msg')){
+			$data['error_msg'] = $this->session->userdata('error_msg');
+			$this->session->unset_userdata('error_msg');
+		}
+
+		$config["base_url"] = "http://localhost/pda-projekt/index.php/Taxikari/taxikari";
+		$config["total_rows"] = $this->Taxikari_model->get_count();
+		$config["per_page"] = 5;
+		$config['uri_segment'] = 3;
+
+		$config['first_link'] = 'Prvý';
+		$config['last_link'] = 'Posledný';
+
+
+		$limit = $config['per_page'];
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data["links"] = $this->pagination->create_links();
+		$data['employees'] = $this->Taxikari_model->get_employees($limit, $page);
+		//$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
 		$data['title'] = 'Taxislužba';
 
 		$this->load->view('templates/header', $data);

@@ -53,5 +53,4 @@ $route['default_controller'] = 'Taxikari';
 $route['404_override'] = '';
 $route['translate_uri_dashes'] = FALSE;
 $route['taxikari'] = 'taxikari';
-$route['auta/(:num)'] = 'auta';
 $route['(:any)'] = 'Welcome';

@@ -1,9 +1,22 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Taxikari_model extends CI_Model {
+
+	protected $table = 'employees';
+
 	public function __construct()
 	{
 		$this->load->database();
+	}
+
+	public function get_count() {
+		return $this->db->count_all($this->table);
+	}
+
+	public function get_employees($limit, $page) {
+		$query = $this->db->query("SELECT * FROM employees LEFT JOIN services ON employees.Services_idServices=services.idServices LIMIT $page, $limit");
+		$result = $query->result_array();
+		return $result;
 	}
 
 	function ZobrazSluzby($id="") {
