@@ -17,6 +17,11 @@
 				<div class="panel-body">
 					<form method="post" action="" class="form">
 						<div class="form-group">
+							<label for="title">Dátum a čas</label>
+							<input type="text" class="form-control" name="datetime" id="datetime" placeholder="Vložte dátum a čas" value="<?php echo !empty($post['datetime'])?$post['datetime']:''; ?>">
+							<?php echo form_error('latitude','<p class="help-block text-danger">','</p>'); ?>
+						</div>
+						<div class="form-group">
 							<label for="title">Latitude</label>
 							<input type="text" class="form-control" name="latitude" id="latitude" placeholder="Vložte latitude" value="<?php echo !empty($post['latitude'])?$post['latitude']:''; ?>">
 							<?php echo form_error('latitude','<p class="help-block text-danger">','</p>'); ?>
@@ -64,10 +69,11 @@
 
 						<div class="form-group">
 							<label for="title">Zamestnanec - Auto</label>
-							<select class="form-control" name="employeeCarSelect" disabled="true">
+							<select class="form-control" name="employeeCarSelect">
+
 								<?php if(!empty($cars)): foreach($cars as $car): ?>
-									<option name="Employees_Cars_id" value="<?php echo $car['id']; ?>"
-										<?php if(!empty($post['Employees_Cars_id']) == $car['id']) echo "selected"; ?>><?php echo $car['id'] . " - " . $car['Brand'] . " - " . $car['Model']; ?></option>
+									<option name="Employees_Cars_id" value="<?php echo $car['carid']; ?>"
+										<?php if(!empty($post['Employees_Cars_id']) == $car['carid']) echo "selected"; ?>><?php echo $car['carid'] . " - " . $car['Brand'] . " - " . $car['Model']; ?></option>
 								<?php endforeach;?>
 								<?php else: ?>
 									Žiadné služby ......

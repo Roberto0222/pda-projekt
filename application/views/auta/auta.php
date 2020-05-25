@@ -9,7 +9,6 @@
 		</div>
 	<?php } ?>
 
-
 				<div class="row justify-content-center">
 					<div class="table-responsive-xl">
 							<table id="table" class="table table-dark text-centered" border="2">
@@ -94,8 +93,11 @@
 								</tbody>
 							</table>
 
+						  <p style="font-size: 24px; letter-spacing: 8px;"><?php echo $links; ?></p>
 					</div>
+
 
 				</div>
 			</div>
 		</div>
+

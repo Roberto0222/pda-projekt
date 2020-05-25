@@ -43,6 +43,7 @@
 								-->
 
 								<?php if(!empty($employees)): foreach($employees as $employee): ?>
+
 									<tr>
 										<td><?php echo '#'.$employee['id']; ?></td>
 										<td><?php echo $employee['firstName']; ?></td>
@@ -63,6 +64,7 @@
 											<a href="<?php echo site_url('taxikari/delete/'.$employee['id']); ?>" onclick="return confirm('Are you sure to delete?')"><img src="<?php echo site_url();?>/../assets/img/icons/trash-4x.png" alt="Delete"></a>
 										</td>
 									</tr>
+
 								<?php endforeach;?>
 
 									<?php else: ?>

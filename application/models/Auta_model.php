@@ -1,6 +1,9 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Auta_model extends CI_Model {
+
+	protected $table = 'cars';
+
 	public function __construct()
 	{
 		$this->load->database();
@@ -26,6 +29,16 @@ class Auta_model extends CI_Model {
 			$query = $this->db->get('cars');
 			return $query->result_array();
 		}
+	}
+
+	public function get_count() {
+		return $this->db->count_all($this->table);
+	}
+
+	public function get_cars($limit, $page) {
+		$query = $this->db->query("SELECT *,cars.id as carid,employees.id as employeeid FROM cars LEFT JOIN employees ON employees.Cars_id=cars.id LIMIT $page, $limit");
+		$result = $query->result_array();
+		return $result;
 	}
 
 	// vlozenie zaznamu

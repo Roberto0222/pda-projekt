@@ -121,7 +121,7 @@ class Taxikari extends CI_Controller {
 			$this->form_validation->set_rules('lastName', 'Pole priezvisko', 'required');
 			$this->form_validation->set_rules('firstName', 'Pole meno', 'required');
 			$this->form_validation->set_rules('telNumber', 'Pole tel. číslo', 'required');
-			$service = "";
+
 			//priprava dat pre vlozenie
 			$postData = array(
 				'lastName' => $this->input->post('lastName'),

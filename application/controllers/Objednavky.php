@@ -54,6 +54,7 @@ class Objednavky extends CI_Controller {
 		//zistenie, ci bola zaslana poziadavka na pridanie zazanmu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
+			$this->form_validation->set_rules('datetime','Pole dátum a čas','required');
 			$this->form_validation->set_rules('latitude', 'Pole latitude', 'required');
 			$this->form_validation->set_rules('longitude', 'Pole longitude', 'required');
 			$this->form_validation->set_rules('locationFrom', 'Pole odkiaľ', 'required');
@@ -62,6 +63,7 @@ class Objednavky extends CI_Controller {
 
 			//priprava dat pre vlozenie
 			$postData = array(
+				'datetime' => $this->input->post('datetime'),
 				'latitude' => $this->input->post('latitude'),
 				'longitude' => $this->input->post('longitude'),
 				'locationFrom' => $this->input->post('locationFrom'),
@@ -104,6 +106,7 @@ class Objednavky extends CI_Controller {
 
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
+			$this->form_validation->set_rules('datetime','Pole dátum a čas','required');
 			$this->form_validation->set_rules('latitude', 'Pole latitude', 'required');
 			$this->form_validation->set_rules('longitude', 'Pole longitude', 'required');
 			$this->form_validation->set_rules('locationFrom', 'Pole odkiaľ', 'required');
@@ -112,13 +115,15 @@ class Objednavky extends CI_Controller {
 
 			//priprava dat pre vlozenie
 			$postData = array(
+				'datetime' => $this->input->post('datetime'),
 				'latitude' => $this->input->post('latitude'),
 				'longitude' => $this->input->post('longitude'),
 				'locationFrom' => $this->input->post('locationFrom'),
 				'locationTo' => $this->input->post('locationTo'),
 				'distanceInKm' => $this->input->post('distanceInKm'),
 				'fuelUsed' => $this->input->post('fuelUsed'),
-				'Employees_id' => $this->input->post('employeeSelect')
+				'Employees_id' => $this->input->post('employeeSelect'),
+				'Employees_Cars_id' => $this->input->post('employeeCarSelect')
 			);
 
 			//validacia zaslanych dat
