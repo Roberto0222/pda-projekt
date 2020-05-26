@@ -115,7 +115,7 @@ class Objednavky extends CI_Controller {
 	public function edit($id){
 		$data = array();
 		//ziskanie dat z tabulky
-		$postData = $this->Objednavky_model->ShowOrders($id);
+		$postData = $this->Objednavky_model->ZobrazObjednavky($id);
 
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
@@ -143,7 +143,7 @@ class Objednavky extends CI_Controller {
 				$update = $this->Objednavky_model->update($postData, $id);
 
 				if($update){
-					$this->session->set_userdata('success_msg', 'Záznam o študentovi bol aktualizovaný.');
+					$this->session->set_userdata('success_msg', 'Záznam o objednávky bol aktualizovaný.');
 					redirect('/taxikari');
 				}else{
 					$data['error_msg'] = 'Nastal problém.';

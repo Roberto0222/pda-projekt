@@ -9,16 +9,6 @@ class Objednavky_model extends CI_Model {
 		$this->load->database();
 	}
 
-	/*
-	public function get_orders($limit, $page) {
-		$query = $this->db->query("SELECT *,contracts.Employees_id as cid,employees.id as eid FROM contracts 
-									LEFT JOIN employees ON employees.id=contracts.Employees_id");
-		//$query = $this->db->query("SELECT *,contracts.Employees.id as employeeid,employees.id as employeeid FROM contracts LEFT JOIN employees ON employees.id=contracts.Employeesid LIMIT $page, $limit");
-		$result = $query->result_array();
-		return $result;
-	}
-	*/
-
 	public function get_count() {
 		return $this->db->count_all($this->table);
 	}
