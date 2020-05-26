@@ -10,7 +10,7 @@ class Taxikari extends CI_Controller {
 		$this->load->library('pagination');
 		$this->load->model('Taxikari_model');
 	}
-	/*
+
 	public function index(){
 		$data = array();
 		//ziskanie sprav zo session
@@ -29,6 +29,7 @@ class Taxikari extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	/*
 	public function auta() {
 		$data = array();
 		$config = array();
