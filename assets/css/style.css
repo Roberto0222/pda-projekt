@@ -33,3 +33,15 @@ a {
 	max-width: 100%;
 	height: auto;
 }
+
+.detailView {
+	font-size: 30px;
+}
+
+.taxikariView {
+	background-color: #808080;
+	background: rgb(128, 128, 128); /* Fallback for older browsers without RGBA-support */
+	background: rgba(128, 128, 128, 0.5);
+	border: 2px;
+	border-radius: 25px;
+}

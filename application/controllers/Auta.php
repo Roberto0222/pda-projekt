@@ -39,7 +39,7 @@ class Auta extends CI_Controller {
 		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		$data["links"] = $this->pagination->create_links();
 		$data['cars'] = $this->Auta_model->get_cars($limit, $page);
-		$data['title'] = 'Taxislužba';
+		$data['title'] = 'Autá';
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('auta/auta', $data);

@@ -51,6 +51,7 @@ class Taxikari_model extends CI_Model {
 
 	function ZobrazTaxikari($id="") {
 		if(!empty($id)) {
+			$this->db->join('company', 'company.id=employees.TaxiSluzba_id', 'inner');
 			$query = $this->db->get_where('employees',array('employees.id'=>$id));
 			return $query->row_array();
 		} else {

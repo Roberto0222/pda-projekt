@@ -94,7 +94,7 @@ class Taxikari extends CI_Controller {
 		$data["links"] = $this->pagination->create_links();
 		$data['employees'] = $this->Taxikari_model->get_employees($limit, $page);
 		//$data['employees'] = $this->Taxikari_model->ZobrazTaxikari();
-		$data['title'] = 'Taxislužba';
+		$data['title'] = 'Zamestnanci';
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('taxikari/zamestnanci', $data);
@@ -104,7 +104,7 @@ class Taxikari extends CI_Controller {
 	public function view($id) {
 		$data = array();
 		if(!empty($id)) {
-			$data['employees'] = $this->Taxikari_model->ZobrazZamestnanec($id);
+			$data['employees'] = $this->Taxikari_model->ZobrazTaxikari($id);
 			$data['title'] = 'Zamestnanec - ' . $data['employees']['firstName'] . ' ' . $data['employees']['lastName'];
 
 			$this->load->view('templates/header',$data);

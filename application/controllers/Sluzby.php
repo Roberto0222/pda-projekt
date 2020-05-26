@@ -23,7 +23,7 @@ class Sluzby extends CI_Controller {
 
 
 		$data['services'] = $this->Sluzby_model->ZobrazSluzby();
-		$data['title'] = 'Taxislužba';
+		$data['title'] = 'Služby';
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('sluzby/sluzby', $data);
@@ -33,11 +33,11 @@ class Sluzby extends CI_Controller {
 	public function view($id) {
 		$data = array();
 		if(!empty($id)) {
-			$data['employees'] = $this->Taxikari_model->ZobrazZamestnanec($id);
-			$data['title'] = 'Zamestnanec - ' . $data['employees']['firstName'] . ' ' . $data['employees']['lastName'];
+			$data['services'] = $this->Sluzby_model->ZobrazSluzby($id);
+			$data['title'] = 'Služby - ' . $data['services']['idServices'] . ' ' . $data['services']['name'];
 
 			$this->load->view('templates/header',$data);
-			$this->load->view('taxikari/view',$data);
+			$this->load->view('sluzby/view',$data);
 			$this->load->view('templates/footer');
 		} else {
 			redirect('/taxikari');

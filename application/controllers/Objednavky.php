@@ -4,8 +4,10 @@ class Objednavky extends CI_Controller {
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->library('form_validation');
+		$this->load->library('pagination');
 		$this->load->model('Objednavky_model');
 		$this->load->model('Taxikari_model');
 		$this->load->model('Auta_model');
@@ -24,7 +26,19 @@ class Objednavky extends CI_Controller {
 		}
 
 
-		$data['contracts'] = $this->Objednavky_model->ZobrazObjednavky();
+		$config["base_url"] = "http://localhost/pda-projekt/index.php/objednavky/objednavky";
+		$config["total_rows"] = $this->Objednavky_model->get_count();
+		$config["per_page"] = 5;
+		$config['uri_segment'] = 3;
+
+		$config['first_link'] = 'Prvý';
+		$config['last_link'] = 'Posledný';
+
+		$limit = $config['per_page'];
+		$this->pagination->initialize($config);
+		$page = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
+		$data["links"] = $this->pagination->create_links();
+		$data['contracts'] = $this->Objednavky_model->get_orders($limit, $page);
 		$data['title'] = 'Objednávky';
 
 		$this->load->view('templates/header', $data);
@@ -54,7 +68,6 @@ class Objednavky extends CI_Controller {
 		//zistenie, ci bola zaslana poziadavka na pridanie zazanmu
 		if($this->input->post('postSubmit')){
 			//definicia pravidiel validacie
-			$this->form_validation->set_rules('datetime','Pole dátum a čas','required');
 			$this->form_validation->set_rules('latitude', 'Pole latitude', 'required');
 			$this->form_validation->set_rules('longitude', 'Pole longitude', 'required');
 			$this->form_validation->set_rules('locationFrom', 'Pole odkiaľ', 'required');
@@ -63,7 +76,7 @@ class Objednavky extends CI_Controller {
 
 			//priprava dat pre vlozenie
 			$postData = array(
-				'datetime' => $this->input->post('datetime'),
+				'callDate' => $this->input->post('callDate'),
 				'latitude' => $this->input->post('latitude'),
 				'longitude' => $this->input->post('longitude'),
 				'locationFrom' => $this->input->post('locationFrom'),
@@ -102,11 +115,10 @@ class Objednavky extends CI_Controller {
 	public function edit($id){
 		$data = array();
 		//ziskanie dat z tabulky
-		$postData = $this->Objednavky_model->ZobrazObjednavky($id);
+		$postData = $this->Objednavky_model->ShowOrders($id);
 
 		//zistenie, ci bola zaslana poziadavka na aktualizaciu
 		if($this->input->post('postSubmit')){
-			$this->form_validation->set_rules('datetime','Pole dátum a čas','required');
 			$this->form_validation->set_rules('latitude', 'Pole latitude', 'required');
 			$this->form_validation->set_rules('longitude', 'Pole longitude', 'required');
 			$this->form_validation->set_rules('locationFrom', 'Pole odkiaľ', 'required');
@@ -115,15 +127,14 @@ class Objednavky extends CI_Controller {
 
 			//priprava dat pre vlozenie
 			$postData = array(
-				'datetime' => $this->input->post('datetime'),
+				'callDate' => $this->input->post('callDate'),
 				'latitude' => $this->input->post('latitude'),
 				'longitude' => $this->input->post('longitude'),
 				'locationFrom' => $this->input->post('locationFrom'),
 				'locationTo' => $this->input->post('locationTo'),
 				'distanceInKm' => $this->input->post('distanceInKm'),
 				'fuelUsed' => $this->input->post('fuelUsed'),
-				'Employees_id' => $this->input->post('employeeSelect'),
-				'Employees_Cars_id' => $this->input->post('employeeCarSelect')
+				'Employees_id' => $this->input->post('employeeSelect')
 			);
 
 			//validacia zaslanych dat
@@ -140,8 +151,6 @@ class Objednavky extends CI_Controller {
 			}
 		}
 
-		//$data['users'] = $this->Temperatures_model->get_users_dropdown();
-		//	$data['users_selected'] = $postData['user'];
 		$data['post'] = $postData;
 		$data['title'] = 'Pridať zamestnanec';
 		$data['action'] = 'edit';
