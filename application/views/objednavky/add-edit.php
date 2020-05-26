@@ -13,7 +13,7 @@
 		<div class="col"></div>
 		<div class="col">
 			<div class="panel panel-default">
-				<div class="panel-heading"><?php echo $action; ?> objednávka <a href="<?php echo site_url('objednavky/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
+				<div class="panel-heading"> Upraviť údaje o objednávke <a href="<?php echo site_url('objednavky/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
 				<div class="panel-body">
 					<form method="post" action="" class="form">
 						<div class="form-group">
@@ -47,7 +47,7 @@
 							<?php echo form_error('distanceInKm','<p class="help-block text-danger">','</p>'); ?>
 						</div>
 						<div class="form-group">
-							<label for="title">Palivo</label>
+							<label for="title">Spotrebované palivo</label>
 							<input type="text" class="form-control" name="fuelUsed" placeholder="Vložte palivo" value="<?php echo !empty($post['fuelUsed'])?$post['fuelUsed']:''; ?>">
 							<?php echo form_error('fuelUsed','<p class="help-block text-danger">','</p>'); ?>
 						</div>

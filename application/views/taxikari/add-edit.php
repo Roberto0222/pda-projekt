@@ -13,7 +13,7 @@
 		<div class="col"></div>
 		<div class="col">
 			<div class="panel panel-default">
-				<div class="panel-heading"><?php echo $action; ?> zamestnanec <a href="<?php echo site_url('taxikari/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
+				<div class="panel-heading">Upraviť údaje zamestnanca <a href="<?php echo site_url('taxikari/'); ?>" class="glyphicon glyphicon-arrow-left pull-right"></a></div>
 				<div class="panel-body">
 					<form method="post" action="" class="form">
 						<div class="form-group">

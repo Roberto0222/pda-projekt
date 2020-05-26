@@ -22,7 +22,7 @@
 									<th scope="col">Odkiaľ</th>
 									<th scope="col">Kam</th>
 									<th scope="col">Vzdialenosť</th>
-									<th scope="col">Používané palivo</th>
+									<th scope="col">Spotrebované palivo</th>
 									<th scope="col">Dokončil</th>
 									<th scope="col" colspan="3" width="20%">Upraviť</th>
 								</tr>
